@@ -38,13 +38,13 @@ def add():
     priority = get_priority()
     status = get_status()
 
-    # Usar manejo de contexto para la conexión a la base de datos
     with sqlite3.connect("task-manager.db") as conexion:
         cursor = conexion.cursor()
         try:
-            # Usar parámetros en la consulta SQL para evitar interpolación de cadenas
             cursor.execute("INSERT INTO tasks (name, description, priority, status) VALUES (?, ?, ?, ?)", (task, description, priority, status))
         except sqlite3.IntegrityError:
-            print("The category '{}' already exists, please try another one.".format(task))
+            click.echo("The category '{}' already exists, please try another one.".format(task))
+        except sqlite3.OperationalError:
+            click.echo("You have not created the DB and the table tasks, please use the command: 'create-db' ")
         else:
-            print("Category '{}' created".format(task))
+            click.echo("Category '{}' created".format(task))
