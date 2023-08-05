@@ -79,52 +79,55 @@ def list():
     click.echo("5: List task by status")
     option = input("\n>")
 
-    if option == "1":
-        alphabetic = input("Sort by alphabetic order (Y/N)\n>")
-        if alphabetic == "N":
-            cursor.execute("SELECT * FROM tasks")
-            tasks = cursor.fetchall()
-            if tasks == []:
-                click.echo("You don't have any task created")
+    try:
+        if option == "1":
+            alphabetic = input("Sort by alphabetic order (Y/N)\n>")
+            if alphabetic == "N":
+                cursor.execute("SELECT * FROM tasks")
+                tasks = cursor.fetchall()
+                if tasks == []:
+                    click.echo("You don't have any task created")
+                else:
+                    for task in tasks:
+                        click.echo()
+                        click.echo(f"Task ID:".ljust(20) + f"{task[0]}")
+                        click.echo(f"Name:".ljust(20) + f"{task[1]}")
+                        click.echo(f"Description:".ljust(20) + f"{task[2]}")
+                        click.echo(f"Priority:".ljust(20) + f"{task[3]}")
+                        click.echo(f"Status:".ljust(20) + f"{task[4]}")
+                        click.echo("\n")
+            elif alphabetic == "Y":
+                cursor.execute("SELECT * FROM tasks ORDER by name ASC")
+                tasks = cursor.fetchall()
+                if tasks == []:
+                    click.echo("You don't have any task created")
+                else:
+                    for task in tasks:
+                        click.echo()
+                        click.echo(f"Task ID:".ljust(20) + f"{task[0]}")
+                        click.echo(f"Name:".ljust(20) + f"{task[1]}")
+                        click.echo(f"Description:".ljust(20) + f"{task[2]}")
+                        click.echo(f"Priority:".ljust(20) + f"{task[3]}")
+                        click.echo(f"Status:".ljust(20) + f"{task[4]}")
+                        click.echo("\n")
             else:
-                for task in tasks:
-                    click.echo()
-                    click.echo(f"Task ID:".ljust(20) + f"{task[0]}")
-                    click.echo(f"Name:".ljust(20) + f"{task[1]}")
-                    click.echo(f"Description:".ljust(20) + f"{task[2]}")
-                    click.echo(f"Priority:".ljust(20) + f"{task[3]}")
-                    click.echo(f"Status:".ljust(20) + f"{task[4]}")
-                    click.echo("\n")
-        elif alphabetic == "Y":
-            cursor.execute("SELECT * FROM tasks ORDER by name ASC")
-            tasks = cursor.fetchall()
-            if tasks == []:
-                click.echo("You don't have any task created")
-            else:
-                for task in tasks:
-                    click.echo()
-                    click.echo(f"Task ID:".ljust(20) + f"{task[0]}")
-                    click.echo(f"Name:".ljust(20) + f"{task[1]}")
-                    click.echo(f"Description:".ljust(20) + f"{task[2]}")
-                    click.echo(f"Priority:".ljust(20) + f"{task[3]}")
-                    click.echo(f"Status:".ljust(20) + f"{task[4]}")
-                    click.echo("\n")
-        else:
-             click.echo("I dont undestand, sorry")
+                    click.echo("I dont undestand, sorry")
 
-    elif option == "2":
-        list_by_id(task_id=input("Enter the ID of the task you want to view: "))
+        elif option == "2":
+            list_by_id(task_id=input("Enter the ID of the task you want to view: "))
 
-    elif option == "3":
-        list_by_name(task_name=input("Enter the name of the task you want to view: "))
+        elif option == "3":
+            list_by_name(task_name=input("Enter the name of the task you want to view: "))
 
-    elif option == "4":
-        list_by_name(task_name=input("Enter the priority of the task you want to view: "))
+        elif option == "4":
+            list_by_name(task_name=input("Enter the priority of the task you want to view: "))
 
-    elif option == "5":
-        list_by_name(task_name=input("Enter the status of the task you want to view: "))
+        elif option == "5":
+            list_by_name(task_name=input("Enter the status of the task you want to view: "))
 
-    
+    except sqlite3.OperationalError:
+            click.echo("You have not created the DB and the table tasks, please use the command: 'create-db' ")
+            
     conexion.close()
     
 
