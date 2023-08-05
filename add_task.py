@@ -23,7 +23,7 @@ def get_status():
         click.echo("Completed:\tThe task has been finished and meets all requirements.")
         click.echo("Revision:\tThe task has been completed, but it requires review and approval before being considered fully finished.")
         click.echo("Canceled:\tThe task has been canceled and will not be continued.")
-        click.echo("Paused:\tThe task has been temporarily stopped and is not currently being worked on.")
+        click.echo("Paused:\t\tThe task has been temporarily stopped and is not currently being worked on.")
         click.echo("Rejected:\tThe task is considered unfeasible or unnecessary after a review.")
         status = input(">")
         if status not in ["Pending", "Started", "Completed", "Revision", "Canceled", "Paused", "Rejected"]:
