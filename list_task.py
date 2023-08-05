@@ -68,7 +68,7 @@ def list_by_status(task_status):
     conexion.close()
 
 @click.command()
-def list():
+def list_task():
     conexion = sqlite3.connect("task-manager.db")
     cursor = conexion.cursor()
     click.echo("Choose an option to list tasks:")
