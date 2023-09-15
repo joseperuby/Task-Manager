@@ -120,10 +120,10 @@ def list_task():
             list_by_name(task_name=input("Enter the name of the task you want to view: "))
 
         elif option == "4":
-            list_by_name(task_name=input("Enter the priority of the task you want to view: "))
+            list_by_priority(task_priority=input("Enter the priority of the task you want to view: "))
 
         elif option == "5":
-            list_by_name(task_name=input("Enter the status of the task you want to view: "))
+            list_by_status(task_status=input("Enter the status of the task you want to view: "))
 
     except sqlite3.OperationalError:
             click.echo("You have not created the DB and the table tasks, please use the command: 'create-db' ")

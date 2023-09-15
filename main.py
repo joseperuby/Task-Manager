@@ -3,13 +3,13 @@ import sqlite3
 import click
 
 # Local imports
-from delete_task import delete
-from welcome import welcome
-from add_task import add
-from create_db import create_db
-from list_task import list_task
-from view_task import view
-from update_task import update
+from commands.delete_task import delete
+from commands.welcome import welcome
+from commands.add_task import add
+from commands.create_db import create_db
+from commands.list_task import list_task
+from commands.view_task import view
+from commands.update_task import update
 
 # Functions
 @click.group(help="Welcome to your favorite tasks manager app!")
